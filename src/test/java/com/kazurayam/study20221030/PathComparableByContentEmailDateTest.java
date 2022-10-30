@@ -41,8 +41,12 @@ public class PathComparableByContentEmailDateTest {
 
     @Test
     public void test_compareTo_greater_than() {
-        PathComparableByDateTime p0 = new PathComparableByContentEmailDate(dataFiles.get(0));
-        PathComparableByDateTime p1 = new PathComparableByContentEmailDate(dataFiles.get(1));
+        PathComparableByDateTime p0 =
+                new PathComparableByContentEmailDate(
+                        TestHelper.lookup(dataFiles, "79edddc6"));
+        PathComparableByDateTime p1 =
+                new PathComparableByContentEmailDate(
+                        TestHelper.lookup(dataFiles, "f503182a"));
         assertEquals(1, p0.compareTo(p1),
                 String.format("p0.timestamp=%s, p1.timestamp=%s",
                         p0.getTimestampFormatted(),
@@ -51,7 +55,9 @@ public class PathComparableByContentEmailDateTest {
 
     @Test
     public void test_compareTo_equal() {
-        PathComparableByDateTime p0 = new PathComparableByContentEmailDate(dataFiles.get(0));
+        PathComparableByDateTime p0 =
+                new PathComparableByContentEmailDate(
+                        TestHelper.lookup(dataFiles, "79edddc6"));
         assertEquals(0, p0.compareTo(p0),
                 String.format("p0.timestamp=%s, p0.timestamp=%s",
                         p0.getTimestampFormatted(),
@@ -60,8 +66,12 @@ public class PathComparableByContentEmailDateTest {
 
     @Test
     public void test_compareTo_less_than() {
-        PathComparableByDateTime p0 = new PathComparableByContentEmailDate(dataFiles.get(0));
-        PathComparableByDateTime p1 = new PathComparableByContentEmailDate(dataFiles.get(1));
+        PathComparableByDateTime p0 =
+                new PathComparableByContentEmailDate(
+                        TestHelper.lookup(dataFiles, "79edddc6"));
+        PathComparableByDateTime p1 =
+                new PathComparableByContentEmailDate(
+                        TestHelper.lookup(dataFiles, "f503182a"));
         assertEquals(-1, p1.compareTo(p0),
                 String.format("p1.timestamp=%s, p0.timestamp=%s",
                         p1.getTimestampFormatted(),

@@ -30,9 +30,13 @@ public class PathComparableByFileLastModifiedTest {
 
     @Test
     public void test_compareTo() {
-        PathComparableByDateTime p0 = new PathComparableByFileLastModified(dataFiles.get(0));
-        PathComparableByDateTime p1 = new PathComparableByFileLastModified(dataFiles.get(1));
-        assertEquals(0, p0.compareTo(p1),
+        PathComparableByDateTime p0 =
+                new PathComparableByContentEmailDate(
+                        TestHelper.lookup(dataFiles, "79edddc6"));
+        PathComparableByDateTime p1 =
+                new PathComparableByContentEmailDate(
+                        TestHelper.lookup(dataFiles, "f503182a"));
+        assertEquals(1, p0.compareTo(p1),
                 String.format("p0.timestamp=%s, p1.timestamp=%s",
                         p0.getTimestampFormatted(),
                         p1.getTimestampFormatted()));

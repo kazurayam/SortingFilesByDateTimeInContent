@@ -10,13 +10,13 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * This demonstrates how to use PathComparableByFileLastModified class
+ * This demonstrates how to use PathComparableByContentEmailDate class
  */
-public class Main1 {
+public class Main2 {
 
     private Path dir;
 
-    public Main1() {
+    public Main2() {
         dir = null;
     }
 
@@ -41,8 +41,8 @@ public class Main1 {
                 Files.list(this.dir)
                         .filter(p -> { return p.getFileName().toString().endsWith(".eml"); })
                         // wrap the path
-                        .map(PathComparableByFileLastModified::new)
-                        // to sort by the lastModified property of File
+                        .map(PathComparableByContentEmailDate::new)
+                        // to sort by the Email Date in the file content
                         .sorted(Comparator.reverseOrder())
                         .collect(Collectors.toList());
 
@@ -62,10 +62,10 @@ public class Main1 {
     public static void main(String[] args) throws IOException {
         if (args.length == 0) {
             throw new IllegalArgumentException(
-                    "usage: java " + Main1.class.getName() + " <path of data directory>");
+                    "usage: java " + Main2.class.getName() + " <path of data directory>");
         }
         Path p = Paths.get(args[0]);
-        Main1 instance = new Main1();
+        Main2 instance = new Main2();
         instance.setDir(p);
         instance.execute();
     }
