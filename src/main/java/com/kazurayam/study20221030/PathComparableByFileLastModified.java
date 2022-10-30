@@ -1,4 +1,4 @@
-package com.kazurayam.study;
+package com.kazurayam.study20221030;
 
 import java.io.IOException;
 import java.nio.file.Files;
