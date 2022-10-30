@@ -41,12 +41,31 @@ public class PathComparableByContentEmailDateTest {
 
 
     @Test
-    public void test_compareTo() {
+    public void test_compareTo_greater_than() {
         PathComparableByDateTime p0 = new PathComparableByContentEmailDate(dataFiles.get(0));
         PathComparableByDateTime p1 = new PathComparableByContentEmailDate(dataFiles.get(1));
-        assertEquals(0, p0.compareTo(p1),
+        assertEquals(1, p0.compareTo(p1),
                 String.format("p0.timestamp=%s, p1.timestamp=%s",
                         p0.getTimestampFormatted(),
                         p1.getTimestampFormatted()));
+    }
+
+    @Test
+    public void test_compareTo_equal() {
+        PathComparableByDateTime p0 = new PathComparableByContentEmailDate(dataFiles.get(0));
+        assertEquals(0, p0.compareTo(p0),
+                String.format("p0.timestamp=%s, p0.timestamp=%s",
+                        p0.getTimestampFormatted(),
+                        p0.getTimestampFormatted()));
+    }
+
+    @Test
+    public void test_compareTo_less_than() {
+        PathComparableByDateTime p0 = new PathComparableByContentEmailDate(dataFiles.get(0));
+        PathComparableByDateTime p1 = new PathComparableByContentEmailDate(dataFiles.get(1));
+        assertEquals(-1, p1.compareTo(p0),
+                String.format("p1.timestamp=%s, p0.timestamp=%s",
+                        p1.getTimestampFormatted(),
+                        p0.getTimestampFormatted()));
     }
 }
