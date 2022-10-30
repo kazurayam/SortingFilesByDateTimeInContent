@@ -1,4 +1,4 @@
-package com.kazurayam.ks;
+package com.kazurayam.study;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -43,9 +43,9 @@ public final class PathComparableByContentEmailDate extends PathComparableByDate
 
     public static final DateTimeFormatter EMAIL_DATE_FORMATTER =
             new DateTimeFormatterBuilder()
-                    .append(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm:ss Z", Locale.US))
-                    .appendOffset("+HHMM", "+0000")
-                    .toFormatter();
+                    .appendPattern("dd MMM yyyy HH:mm:ss ")
+                    .appendOffset("+HHmm", "+0000")
+                    .toFormatter(Locale.ENGLISH);
 
     public PathComparableByContentEmailDate(Path path) {
         super(path);
