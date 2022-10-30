@@ -92,7 +92,7 @@ public final class PathComparableByContentEmailDate extends PathComparableByDate
         if (timestamp.isBefore(other.timestamp)) {
             return -1;
         } else if (timestamp.isEqual(other.timestamp)) {
-            return 0;
+            return this.get().toString().compareTo(other.get().toString());
         } else {
             return 1;
         }
