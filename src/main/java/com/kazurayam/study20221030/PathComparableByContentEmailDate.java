@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -47,6 +46,11 @@ public final class PathComparableByContentEmailDate extends PathComparableByDate
                     .appendOffset("+HHmm", "+0000")
                     .toFormatter(Locale.ENGLISH);
 
+    public static final ZonedDateTime UNIX_EPOCH_SINCE =
+            ZonedDateTime.of(1970, 1, 1,
+                    0, 0, 0, 0,
+                    ZoneId.of("UTC"));
+
     public PathComparableByContentEmailDate(Path path) {
         super(path);
         this.timestamp = resolveTimestamp(path);
@@ -60,9 +64,7 @@ public final class PathComparableByContentEmailDate extends PathComparableByDate
             return dt;
         } else {
             logger.warn(path + " contains 0 Email headers");
-            return ZonedDateTime.of(1970, 1, 1,
-                    0,0,0,0,
-                    ZoneId.of("UTC"));
+            return UNIX_EPOCH_SINCE;
         }
     }
 
@@ -91,8 +93,7 @@ public final class PathComparableByContentEmailDate extends PathComparableByDate
         if (headers.containsKey("Date")) {
             return ZonedDateTime.parse(headers.get("Date"), EMAIL_DATE_FORMATTER);
         } else {
-            LocalDateTime ldt = LocalDateTime.of(1970, 1, 1, 0, 0, 0);
-            return ZonedDateTime.of(ldt, ZoneId.systemDefault());
+            return UNIX_EPOCH_SINCE;
         }
     }
 
