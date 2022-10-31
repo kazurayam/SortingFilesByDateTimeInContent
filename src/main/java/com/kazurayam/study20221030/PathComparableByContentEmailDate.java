@@ -55,8 +55,15 @@ public final class PathComparableByContentEmailDate extends PathComparableByDate
     @Override
     public ZonedDateTime resolveTimestamp(Path path) {
         Map<String, String > headers = parseContentForHeaders(this.path);
-        ZonedDateTime dt = getContentDate(headers);
-        return dt;
+        if (headers.keySet().size() > 0) {
+            ZonedDateTime dt = getContentDate(headers);
+            return dt;
+        } else {
+            logger.warn(path + " contains 0 Email headers");
+            return ZonedDateTime.of(1970, 1, 1,
+                    0,0,0,0,
+                    ZoneId.of("UTC"));
+        }
     }
 
     static Map<String, String> parseContentForHeaders(Path p) {
@@ -67,10 +74,12 @@ public final class PathComparableByContentEmailDate extends PathComparableByDate
                             Files.newInputStream(p.toFile().toPath()),
                             StandardCharsets.UTF_8));
             String line;
-            while ((line = br.readLine()) != null && line.length() != 0) {
-                String key = line.substring(0, line.indexOf(":")).trim();
-                String val = line.substring(line.indexOf(":") + 1).trim();
-                m.put(key, val);
+            while ((line = br.readLine()) != null && line.trim().length() != 0) {
+                if (line.indexOf(":") >= 0) {
+                    String key = line.substring(0, line.indexOf(":")).trim();
+                    String val = line.substring(line.indexOf(":") + 1).trim();
+                    m.put(key, val);
+                }
             }
         } catch (IOException e) {
             logger.warn(e.getMessage());
