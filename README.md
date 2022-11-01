@@ -84,3 +84,8 @@ $ ./gradlew test
 ```
 
 This requires Java8 or newer installed in your environment.
+
+
+## Javadoc
+
+- https://kazurayam.github.io/SortingFilesByDateTimeInContent/
