@@ -33,7 +33,7 @@ public class PathComparableByContentEmailDateTest {
 
     @Test
     public void test_EMAIL_DATE_FORMATTER() {
-        DateTimeFormatter dtf = PathComparableByContentEmailDate.EMAIL_DATE_FORMATTER;
+        DateTimeFormatter dtf = AbstractPathComparableByDateTime.EMAIL_DATE_FORMATTER;
         String dateStr = "26 Oct 2022 12:00:00 -0700";
         TemporalAccessor ta = dtf.parse(dateStr);
     }
@@ -41,40 +41,46 @@ public class PathComparableByContentEmailDateTest {
 
     @Test
     public void test_compareTo_greater_than() {
-        PathComparableByDateTime p0 =
+        AbstractPathComparableByDateTime p0 =
                 new PathComparableByContentEmailDate(
                         TestHelper.lookup(dataFiles, "79edddc6"));
-        PathComparableByDateTime p1 =
+        AbstractPathComparableByDateTime p1 =
                 new PathComparableByContentEmailDate(
                         TestHelper.lookup(dataFiles, "f503182a"));
         assertEquals(1, p0.compareTo(p1),
-                String.format("p0.timestamp=%s, p1.timestamp=%s",
-                        p0.getTimestampFormatted(),
-                        p1.getTimestampFormatted()));
+                String.format("p0.getValue()=%s, p1.getValue()=%s",
+                        p0.getValue(),
+                        p1.getValue()
+                )
+        );
     }
 
     @Test
     public void test_compareTo_equal() {
-        PathComparableByDateTime p0 =
+        AbstractPathComparableByDateTime p0 =
                 new PathComparableByContentEmailDate(
                         TestHelper.lookup(dataFiles, "79edddc6"));
         assertEquals(0, p0.compareTo(p0),
-                String.format("p0.timestamp=%s, p0.timestamp=%s",
-                        p0.getTimestampFormatted(),
-                        p0.getTimestampFormatted()));
+                String.format("p0.getValue()=%s, p0.getValue()=%s",
+                        p0.getValue(),
+                        p0.getValue()
+                )
+        );
     }
 
     @Test
     public void test_compareTo_less_than() {
-        PathComparableByDateTime p0 =
+        AbstractPathComparableByDateTime p0 =
                 new PathComparableByContentEmailDate(
                         TestHelper.lookup(dataFiles, "79edddc6"));
-        PathComparableByDateTime p1 =
+        AbstractPathComparableByDateTime p1 =
                 new PathComparableByContentEmailDate(
                         TestHelper.lookup(dataFiles, "f503182a"));
         assertEquals(-1, p1.compareTo(p0),
-                String.format("p1.timestamp=%s, p0.timestamp=%s",
-                        p1.getTimestampFormatted(),
-                        p0.getTimestampFormatted()));
+                String.format("p1.getValue()=%s, p0.getValue()=%s",
+                        p1.getValue(),
+                        p0.getValue()
+                )
+        );
     }
 }

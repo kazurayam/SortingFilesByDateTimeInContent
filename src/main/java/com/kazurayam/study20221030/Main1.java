@@ -37,7 +37,7 @@ public class Main1 {
                     "dir is not set. you should do setDir(Path) before execute()");
         }
         // sort the files in the give directory by its lastModified timestamp
-        List<PathComparableByDateTime> files =
+        List<PathComparableByFileLastModified> files =
                 Files.list(this.dir)
                         .filter(p -> { return p.getFileName().toString().endsWith(".eml"); })
                         // wrap the path
@@ -47,10 +47,14 @@ public class Main1 {
                         .collect(Collectors.toList());
 
         int count = 0;
-        for (PathComparableByDateTime pc : files) {
+        for (PathComparableByFileLastModified pc : files) {
             count += 1;
-            System.out.println(String.format("%d\t%s\t%s",
-                    count, pc.getTimestampFormatted(), dir.relativize(pc.get())));
+            assert pc != null;
+            assert dir != null;
+            assert pc.get() != null;
+            assert dir.relativize(pc.get()) != null;
+            System.out.printf("%d\t%s\t%s%n",
+                    count, pc.getValue(), this.dir.relativize(pc.get()));
         }
     }
 

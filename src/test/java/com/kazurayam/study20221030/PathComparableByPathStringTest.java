@@ -1,19 +1,20 @@
 package com.kazurayam.study20221030;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PathComparableByFileLastModifiedTest {
+public class PathComparableByPathStringTest {
 
     private static Path dataDir;
     private List<Path> dataFiles;
@@ -30,17 +31,16 @@ public class PathComparableByFileLastModifiedTest {
 
     @Test
     public void test_compareTo() {
-        AbstractPathComparableByDateTime p0 =
-                new PathComparableByContentEmailDate(
+        IPathComparable p0 = new PathComparableByPathString(
                         TestHelper.lookup(dataFiles, "79edddc6"));
-        AbstractPathComparableByDateTime p1 =
-                new PathComparableByContentEmailDate(
+        IPathComparable p1 = new PathComparableByPathString(
                         TestHelper.lookup(dataFiles, "f503182a"));
-        assertEquals(1, p0.compareTo(p1),
+        assertTrue(p0.compareTo(p1) < 0,
                 String.format("p0.getValue()=%s, p1.getValue()=%s",
                         p0.getValue(),
                         p1.getValue()
                 )
         );
     }
+
 }

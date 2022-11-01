@@ -7,7 +7,10 @@ import java.nio.file.attribute.FileTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-public final class PathComparableByFileLastModified extends PathComparableByDateTime {
+/**
+ * Path is compared by the time stamp when the file was last modified
+ */
+public final class PathComparableByFileLastModified extends AbstractPathComparableByDateTime {
 
     public PathComparableByFileLastModified(Path p) {
         super(p);

@@ -20,18 +20,10 @@ test {
     useJUnitPlatform()
 }
 
-task allJavadoc(type: Javadoc) {
-    group = "aggregation"
+javadoc {
     description = rootProject.name
     title = "$description $version API"
     destinationDir = file("${buildDir}/docs/javadoc")
-    def sourceProjects =
-            subprojects.findAll {
-                it.plugins.hasPlugin("java") || it.plugins.hasPlugin("groovy")
-            }
-    source sourceProjects.collect { prj -> prj.sourceSets.main.allJava }
-    classpath = files(sourceProjects.collect { prj -> prj.sourceSets.main.runtimeClasspath })
-
     options.overview = "gradle/api/overview.html"
     options.showFromProtected()
     failOnError = false
@@ -41,9 +33,9 @@ task copyJavadocToDocsDir(type: Copy) {
     from "build/docs/javadoc"
     into "docs/api"
 }
-allJavadoc.finalizedBy copyJavadocToDocsDir
+javadoc.finalizedBy copyJavadocToDocsDir
 
 task javadocJar(type: Jar) {
     archiveClassifier.set("javadoc")
-    from allJavadoc
+    from javadoc
 }
