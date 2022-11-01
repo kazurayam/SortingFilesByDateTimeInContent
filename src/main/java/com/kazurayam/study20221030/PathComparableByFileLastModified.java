@@ -19,7 +19,7 @@ public final class PathComparableByFileLastModified
     public PathComparableByFileLastModified(Path path) {
         super(path);
         this.timestamp = resolveTimestamp(path);
-        this.value = IPathComparableByDateTime.DATE_TIME_FORMATTER.format(this.timestamp);
+        this.value = IPathComparableByDateTime.SORTABLE_DATETIME_FORMATTER.format(this.timestamp);
     }
 
     @Override

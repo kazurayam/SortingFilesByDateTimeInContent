@@ -22,7 +22,7 @@ public class PathComparableByContentEmailHeaderValue
         Objects.requireNonNull(headerKey);
         this.timestamp = resolveTimestamp(path);
         if (headerKey.equals("Date")) {
-            this.value = this.timestamp.format(IPathComparableByDateTime.DATE_TIME_FORMATTER);
+            this.value = this.timestamp.format(IPathComparableByDateTime.SORTABLE_DATETIME_FORMATTER);
         } else {
             Map<String, String> headers = parseContentForHeaders(path);
             if (headers.keySet().size() > 0) {
