@@ -38,8 +38,10 @@ public class Main0 {
         List<Path> files =
                 Files.list(this.dir)
                         .filter(p -> { return p.getFileName().toString().endsWith(".eml"); })
+                        .map(p -> { return new PathComparableByPathString(p);})
                         // sort the Path objects by its path string
                         .sorted(Comparator.reverseOrder())
+                        .map(p -> { return p.get(); })
                         .collect(Collectors.toList());
 
         int count = 0;
@@ -49,7 +51,4 @@ public class Main0 {
                     count, dir.relativize(p)));
         }
     }
-
-
-
 }
