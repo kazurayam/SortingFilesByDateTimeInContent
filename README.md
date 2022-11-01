@@ -85,7 +85,34 @@ $ ./gradlew test
 
 This requires Java8 or newer installed in your environment.
 
-
 ## Javadoc
 
 - https://kazurayam.github.io/SortingFilesByDateTimeInContent/api/
+
+## Special note
+
+The ver0.3.0 supported doing the following 2 things at a single run.
+
+1. filter text files by the value of Email header contained in the file content. For example, select only files with a line of "To: xyz.com" while discarding files with "To: abc.com".
+2. sort the files by the descending order of the lastModified timestamp of java.io.File
+
+An example is here
+
+- [Main3](src/main/java/com/kazurayam/study20221030/Main3.java)
+
+Just for easier reference, I will quote a part of `Main3`:
+
+```
+...
+List<IPathComparable> files =
+    Files.list(this.dir)
+        filter(p -> p.getFileName().toString().endsWith(".eml"))
+        // filter files with "To: xyz.com" header
+        .map(p -> new PathComparableByContentEmailHeaderValue(p, "To"))
+        .filter(p -> p.getValue().matches("xyz.com"))
+        // to sort by the lastModified timestamp
+        .map(p -> new PathComparableByFileLastModified(p.get()))
+        .sorted(reverseOrder())
+        .collect(Collectors.toList());
+...
+```
