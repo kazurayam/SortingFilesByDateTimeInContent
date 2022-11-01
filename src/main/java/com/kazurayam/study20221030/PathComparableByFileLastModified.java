@@ -10,10 +10,16 @@ import java.time.ZonedDateTime;
 /**
  * Path is compared by the time stamp when the file was last modified
  */
-public final class PathComparableByFileLastModified extends AbstractPathComparableByDateTime {
+public final class PathComparableByFileLastModified
+        extends AbstractPathComparable
+        implements IPathComparableByDateTime {
 
-    public PathComparableByFileLastModified(Path p) {
-        super(p);
+    private ZonedDateTime timestamp;
+
+    public PathComparableByFileLastModified(Path path) {
+        super(path);
+        this.timestamp = resolveTimestamp(path);
+        this.value = IPathComparableByDateTime.DATE_TIME_FORMATTER.format(this.timestamp);
     }
 
     @Override

@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * This demonstrates how to use PathComparableByContentEmailDate class
+ * This demonstrates how to use PathComparableByContentEmailHeaderValue class
  */
 public class Main2 {
 
@@ -37,17 +37,17 @@ public class Main2 {
                     "dir is not set. you should do setDir(Path) before execute()");
         }
         // sort the files in the give directory by its lastModified timestamp
-        List<AbstractPathComparableByDateTime> files =
+        List<IPathComparable> files =
                 Files.list(this.dir)
                         .filter(p -> { return p.getFileName().toString().endsWith(".eml"); })
                         // wrap the path
-                        .map(PathComparableByContentEmailDate::new)
+                        .map(p -> { return new PathComparableByContentEmailHeaderValue(p, "Date"); })
                         // to sort by the Email Date in the file content
                         .sorted(Comparator.reverseOrder())
                         .collect(Collectors.toList());
 
         int count = 0;
-        for (AbstractPathComparableByDateTime pc : files) {
+        for (IPathComparable pc : files) {
             count += 1;
             System.out.printf("%d\t%s\t%s%n",
                     count, pc.getValue(), dir.relativize(pc.get()));

@@ -4,19 +4,23 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static java.util.Collections.reverseOrder;
+
 /**
- * This demonstrates how to use PathComparableByFileLastModified class
+ * Demonstrates how to
+ * - sort text files by descending order of the lastModified property of each File
+ * - filter text files which contains an Email Header "To: xyx.com" inside it
+ *   while ignoring files with other values such as "To: abc.com".
  */
-public class Main1 {
+public class Main3 {
 
     private Path dir;
 
-    public Main1() {
+    public Main3() {
         dir = null;
     }
 
@@ -39,36 +43,30 @@ public class Main1 {
         // sort the files in the give directory by its lastModified timestamp
         List<IPathComparable> files =
                 Files.list(this.dir)
-                        .filter(p -> { return p.getFileName().toString().endsWith(".eml"); })
-                        // wrap the path
-                        .map(PathComparableByFileLastModified::new)
-                        // to sort by the lastModified property of File
-                        .sorted(Comparator.reverseOrder())
+                        .filter(p -> p.getFileName().toString().endsWith(".eml"))
+                        // filter files with "To: xyz.com" header
+                        .map(p -> new PathComparableByContentEmailHeaderValue(p, "To"))
+                        .filter(p -> p.getValue().matches("xyz.com"))
+                        // to sort by the lastModified timestamp
+                        .map(p -> new PathComparableByFileLastModified(p.get()))
+                        .sorted(reverseOrder())
                         .collect(Collectors.toList());
 
         int count = 0;
         for (IPathComparable pc : files) {
             count += 1;
-            assert pc != null;
-            assert dir != null;
-            assert pc.get() != null;
             System.out.printf("%d\t%s\t%s%n",
-                    count, pc.getValue(), this.dir.relativize(pc.get()));
+                    count, pc.getValue(), dir.relativize(pc.get()));
         }
     }
 
-    /**
-     *
-     * @param args
-     * @throws IOException
-     */
     public static void main(String[] args) throws IOException {
         if (args.length == 0) {
             throw new IllegalArgumentException(
-                    "usage: java " + Main1.class.getName() + " <path of data directory>");
+                    "usage: java " + Main3.class.getName() + " <path of data directory>");
         }
         Path p = Paths.get(args[0]);
-        Main1 instance = new Main1();
+        Main3 instance = new Main3();
         instance.setDir(p);
         instance.execute();
     }

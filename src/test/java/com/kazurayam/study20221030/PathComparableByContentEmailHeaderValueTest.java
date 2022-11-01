@@ -14,8 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PathComparableByContentEmailDateTest {
+public class PathComparableByContentEmailHeaderValueTest {
 
 
     private static Path dataDir;
@@ -33,7 +34,7 @@ public class PathComparableByContentEmailDateTest {
 
     @Test
     public void test_EMAIL_DATE_FORMATTER() {
-        DateTimeFormatter dtf = AbstractPathComparableByDateTime.EMAIL_DATE_FORMATTER;
+        DateTimeFormatter dtf = IPathComparableByDateTime.EMAIL_DATE_FORMATTER;
         String dateStr = "26 Oct 2022 12:00:00 -0700";
         TemporalAccessor ta = dtf.parse(dateStr);
     }
@@ -41,13 +42,13 @@ public class PathComparableByContentEmailDateTest {
 
     @Test
     public void test_compareTo_greater_than() {
-        AbstractPathComparableByDateTime p0 =
-                new PathComparableByContentEmailDate(
-                        TestHelper.lookup(dataFiles, "79edddc6"));
-        AbstractPathComparableByDateTime p1 =
-                new PathComparableByContentEmailDate(
-                        TestHelper.lookup(dataFiles, "f503182a"));
-        assertEquals(1, p0.compareTo(p1),
+        IPathComparable p0 =
+                new PathComparableByContentEmailHeaderValue(
+                        TestHelper.lookup(dataFiles, "79edddc6"), "Date");
+        IPathComparable p1 =
+                new PathComparableByContentEmailHeaderValue(
+                        TestHelper.lookup(dataFiles, "f503182a"), "Date");
+        assertTrue(p0.compareTo(p1) > 0,
                 String.format("p0.getValue()=%s, p1.getValue()=%s",
                         p0.getValue(),
                         p1.getValue()
@@ -57,9 +58,9 @@ public class PathComparableByContentEmailDateTest {
 
     @Test
     public void test_compareTo_equal() {
-        AbstractPathComparableByDateTime p0 =
-                new PathComparableByContentEmailDate(
-                        TestHelper.lookup(dataFiles, "79edddc6"));
+        IPathComparable p0 =
+                new PathComparableByContentEmailHeaderValue(
+                        TestHelper.lookup(dataFiles, "79edddc6"), "Date");
         assertEquals(0, p0.compareTo(p0),
                 String.format("p0.getValue()=%s, p0.getValue()=%s",
                         p0.getValue(),
@@ -70,13 +71,13 @@ public class PathComparableByContentEmailDateTest {
 
     @Test
     public void test_compareTo_less_than() {
-        AbstractPathComparableByDateTime p0 =
-                new PathComparableByContentEmailDate(
-                        TestHelper.lookup(dataFiles, "79edddc6"));
-        AbstractPathComparableByDateTime p1 =
-                new PathComparableByContentEmailDate(
-                        TestHelper.lookup(dataFiles, "f503182a"));
-        assertEquals(-1, p1.compareTo(p0),
+        IPathComparable p0 =
+                new PathComparableByContentEmailHeaderValue(
+                        TestHelper.lookup(dataFiles, "79edddc6"), "Date");
+        IPathComparable p1 =
+                new PathComparableByContentEmailHeaderValue(
+                        TestHelper.lookup(dataFiles, "f503182a"), "Date");
+        assertTrue( p1.compareTo(p0) < 0,
                 String.format("p1.getValue()=%s, p0.getValue()=%s",
                         p1.getValue(),
                         p0.getValue()
