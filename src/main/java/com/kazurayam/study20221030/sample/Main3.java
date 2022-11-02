@@ -1,4 +1,8 @@
-package com.kazurayam.study20221030;
+package com.kazurayam.study20221030.sample;
+
+import com.kazurayam.study20221030.IPathComparable;
+import com.kazurayam.study20221030.PathComparableByContentEmailHeaderValue;
+import com.kazurayam.study20221030.PathComparableByFileLastModified;
 
 import java.io.IOException;
 import java.nio.file.Files;

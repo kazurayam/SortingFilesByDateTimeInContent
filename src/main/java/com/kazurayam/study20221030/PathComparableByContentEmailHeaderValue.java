@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class PathComparableByContentEmailHeaderValue
-        extends AbstractPathComparable
+        extends BasePathComparable
         implements IPathComparableByContent, IPathComparableByDateTime {
 
     private static final Logger logger = LoggerFactory.getLogger(PathComparableByContentEmailHeaderValue.class);

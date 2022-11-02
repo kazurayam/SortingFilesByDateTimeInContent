@@ -1,4 +1,4 @@
-package com.kazurayam.study20221030;
+package com.kazurayam.study20221030.sample;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class Main3Test {
+public class Main2Test {
 
     Path dataDir;
 
@@ -20,11 +20,10 @@ public class Main3Test {
     @Test
     public void test_smoke() throws IOException {
         System.out.println("------------------------");
-        System.out.println(Main3Test.class.getName());
-        Main3 instance = new Main3();
+        System.out.println(Main2Test.class.getName());
+        Main2 instance = new Main2();
         instance.setDir(dataDir);
         instance.execute();
     }
-
 
 }

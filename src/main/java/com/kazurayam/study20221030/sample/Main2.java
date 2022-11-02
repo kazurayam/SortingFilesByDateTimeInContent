@@ -1,4 +1,7 @@
-package com.kazurayam.study20221030;
+package com.kazurayam.study20221030.sample;
+
+import com.kazurayam.study20221030.IPathComparable;
+import com.kazurayam.study20221030.PathComparableByContentEmailHeaderValue;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,13 +13,13 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * This demonstrates how to use PathComparableByFileLastModified class
+ * This demonstrates how to use PathComparableByContentEmailHeaderValue class
  */
-public class Main1 {
+public class Main2 {
 
     private Path dir;
 
-    public Main1() {
+    public Main2() {
         dir = null;
     }
 
@@ -41,19 +44,16 @@ public class Main1 {
                 Files.list(this.dir)
                         .filter(p -> { return p.getFileName().toString().endsWith(".eml"); })
                         // wrap the path
-                        .map(PathComparableByFileLastModified::new)
-                        // to sort by the lastModified property of File
+                        .map(p -> { return new PathComparableByContentEmailHeaderValue(p, "Date"); })
+                        // to sort by the Email Date in the file content
                         .sorted(Comparator.reverseOrder())
                         .collect(Collectors.toList());
 
         int count = 0;
         for (IPathComparable pc : files) {
             count += 1;
-            assert pc != null;
-            assert dir != null;
-            assert pc.get() != null;
             System.out.printf("%d\t%s\t%s%n",
-                    count, pc.getValue(), this.dir.relativize(pc.get()));
+                    count, pc.getValue(), dir.relativize(pc.get()));
         }
     }
 
@@ -65,10 +65,10 @@ public class Main1 {
     public static void main(String[] args) throws IOException {
         if (args.length == 0) {
             throw new IllegalArgumentException(
-                    "usage: java " + Main1.class.getName() + " <path of data directory>");
+                    "usage: java " + Main2.class.getName() + " <path of data directory>");
         }
         Path p = Paths.get(args[0]);
-        Main1 instance = new Main1();
+        Main2 instance = new Main2();
         instance.setDir(p);
         instance.execute();
     }

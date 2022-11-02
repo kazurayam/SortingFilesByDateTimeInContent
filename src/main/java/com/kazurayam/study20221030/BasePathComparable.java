@@ -8,14 +8,14 @@ import java.nio.file.Path;
 /**
  * Abstract class that implements common methods and properties for other concrete PathParable* classes
  */
-public abstract class AbstractPathComparable implements IPathComparable {
+public abstract class BasePathComparable implements IPathComparable {
 
-    private static final Logger logger = LoggerFactory.getLogger(AbstractPathComparable.class);
+    private static final Logger logger = LoggerFactory.getLogger(BasePathComparable.class);
 
     protected Path path;
     protected String value;
 
-    public AbstractPathComparable(Path path) {
+    public BasePathComparable(Path path) {
         this.path = path;
         this.value = path.toString();
     }
