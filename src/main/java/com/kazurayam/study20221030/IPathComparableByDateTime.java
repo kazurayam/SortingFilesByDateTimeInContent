@@ -14,7 +14,7 @@ public interface IPathComparableByDateTime {
 
     DateTimeFormatter EMAIL_DATE_FORMATTER =
             new DateTimeFormatterBuilder()
-                    .appendPattern("dd MMM yyyy HH:mm:ss ")
+                    .appendPattern("d MMM yyyy HH:mm:ss ")
                     .appendOffset("+HHmm", "+0000")
                     .toFormatter(Locale.ENGLISH);
 

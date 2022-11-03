@@ -39,6 +39,13 @@ public class PathComparableByContentEmailHeaderValueTest {
         TemporalAccessor ta = dtf.parse(dateStr);
     }
 
+    @Test
+    public void test_EMAIL_DATE_FORMATTER_more() {
+        DateTimeFormatter dtf = IPathComparableByDateTime.EMAIL_DATE_FORMATTER;
+        String dateStr = "2 Nov 2022 15:32:04 -0700";
+        TemporalAccessor ta = dtf.parse(dateStr);
+    }
+
 
     @Test
     public void test_compareTo_greater_than() {
