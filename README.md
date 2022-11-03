@@ -66,7 +66,7 @@ Please find the above output from `Main2Test` program demonstrates that it could
 
 ### Code design
 
-Please read the source of class [`com.kazurayam.study20221030.PathComparableByContentEmailDate`](./src/main/java/com/kazurayam/study20221030/PathComparableByContentEmailDate.java) and surroundings.
+Please read the source of class [`com.kazurayam.study20221030.PathComparableByContentEmailHeaderValue`](./src/main/java/com/kazurayam/study20221030/PathComparableByContentEmailHeaderValue.java) and surroundings.
 
 You may find this code is too complicated. Well, the original problem "sort text files by the content" is a complicated one, which deserves this level of complexity in solution. I employed many Java coding techniques which I learned from many books for years. Enjoy.
 
