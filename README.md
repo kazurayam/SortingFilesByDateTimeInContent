@@ -98,7 +98,7 @@ The ver0.3.0 supported doing the following 2 things at a single run.
 
 An example is here
 
-- [Main3](src/main/java/com/kazurayam/study20221030/Main3.java)
+- [Main3](src/main/java/com/kazurayam/study20221030/sample/Main3.java)
 
 Just for easier reference, I will quote a part of `Main3`:
 
