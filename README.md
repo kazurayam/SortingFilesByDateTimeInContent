@@ -28,9 +28,9 @@ aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbQ==
 
 ## Solution
 
-I developed a set of code in Java to solve the problem. I developed a class [`com.kazurayam.study20221030.PathComparableByContentEmailDate`](./src/main/java/com/kazurayam/study20221030/PathComparableByContentEmailDate.java) which implements the solution for the problem.
+I developed a set of code in Java to solve the problem. I developed a class [`com.kazurayam.study20221030.PathComparableByContentEmailHeaderValue`](./src/main/java/com/kazurayam/study20221030/PathComparableByContentEmailHeaderValue.java) which implements the solution for the problem.
 
-I developed an application [`com.kazurayam.study20221030.Main2`](./src/main/java/com/kazurayam/study20221030/Main2.java) that calls the core class. Also this project includes a JUnit5 test [`com.kazurayam.study20221030.Main2Test`](src/test/java/com/kazurayam/study20221030/Main2Test.java) that executes the `Main2` application.
+I developed an application [`com.kazurayam.study20221030.sample.Main2`](./src/main/java/com/kazurayam/study20221030/sample/Main2.java) that calls the core class. Also this project includes a JUnit5 test [`com.kazurayam.study20221030.sample.Main2Test`](src/test/java/com/kazurayam/study20221030/sample/Main2Test.java) that executes the `Main2` application.
 
 ## Description
 
